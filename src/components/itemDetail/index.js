@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Modal, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ItemDetail = ({ item }) => {
@@ -22,7 +22,7 @@ const ItemDetail = ({ item }) => {
               <div>
                 <strong>Price:</strong>
               </div>
-              <div>{item.price}</div>
+              <div>{item.price}€</div>
             </Col>
             <Col>
               <div>
@@ -43,7 +43,7 @@ const ItemDetail = ({ item }) => {
               <div>
                 <strong>Creator:</strong>
               </div>
-              <div></div>
+              <div>{item.creator && item.creator.userName}</div>
             </Col>
             <Col></Col>
           </Row>

@@ -12,6 +12,7 @@ const CreateDesactivationForm = ({ close, item }) => {
 
   const desactivate = () => {
     desactivateItem(item, reason);
+    close();
   };
   return (
     <div>
