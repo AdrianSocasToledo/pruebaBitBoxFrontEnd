@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ItemsList from "../../components/itemsList";
 import getItems from "../../services/itemServices/getItems";
 import { Container, Col, Row, Button, Modal } from "react-bootstrap";
@@ -6,15 +7,12 @@ import CreateItemForm from "../../components/createItemForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ItemPage = () => {
-  const [items, setItems] = useState([]);
   const [show, setShow] = useState(false);
+
+  const items = useSelector((state) => state.itemsReducer.items);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    getItems().then((response) => setItems(response));
-  }, []);
 
   return (
     <div>

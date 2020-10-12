@@ -7,7 +7,6 @@ import {
   Col,
   Card,
   Modal,
-  Form,
   ButtonGroup,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -114,6 +113,7 @@ const ItemsList = ({ items }) => {
                           <div>
                             <Button
                               variant="warning"
+                              disabled={item.state === "Active" ? false : true}
                               onClick={() => handleEditItem(item)}
                             >
                               Edit
