@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { getItemsAction } from "../../redux/actions/itemsActions";
 import editItem from "../../services/itemServices/editItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const EditItemForm = ({ item, onClose }) => {
   const [editDescription, setEditDescription] = useState(item.description);
   const [editPrice, setEditPrice] = useState(item.Price);
+
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEditDescription(item.description);
@@ -15,7 +20,14 @@ const EditItemForm = ({ item, onClose }) => {
   const handleEditItem = () => {
     let supplier;
     let priceReduction;
-    editItem(item.idItem, editDescription, editPrice, supplier, priceReduction);
+    editItem(
+      user,
+      item.idItem,
+      editDescription,
+      editPrice,
+      supplier,
+      priceReduction
+    ).then((response) => dispatch(getItemsAction(user)));
     onClose();
   };
 

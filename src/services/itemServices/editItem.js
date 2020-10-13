@@ -1,4 +1,5 @@
 export default function editItem(
+  user,
   id,
   description,
   price,
@@ -13,11 +14,12 @@ export default function editItem(
     suppliers: supplier,
     priceReductions: priceReduction,
   };
-  fetch(url, {
+  return fetch(url, {
     method: "PUT",
     body: JSON.stringify(request),
     headers: {
       "Content-type": "application/json",
+      authorization: `Bearer ${user.token}`,
     },
   });
 }

@@ -1,17 +1,24 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Button, Form, Modal } from "react-bootstrap";
 import desactivateItem from "../../services/desactivationsService/desactivateItem";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getItemsAction } from "../../redux/actions/itemsActions";
 
 const CreateDesactivationForm = ({ close, item }) => {
   const [reason, setReason] = useState("");
+
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     close();
   };
 
   const desactivate = () => {
-    desactivateItem(item, reason);
+    desactivateItem(user, item, reason).then((response) =>
+      dispatch(getItemsAction(user))
+    );
     close();
   };
   return (

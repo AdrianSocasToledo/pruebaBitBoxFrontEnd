@@ -4,7 +4,7 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import { loginAction } from "../../redux/actions/userActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Login = () => {
+const Login = ({ message }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -51,6 +51,11 @@ const Login = () => {
               </Col>
             </Row>
           </Form.Group>
+          <Row>
+            <Col>
+              <h3>{message}</h3>
+            </Col>
+          </Row>
         </Form>
       </div>
     </Container>

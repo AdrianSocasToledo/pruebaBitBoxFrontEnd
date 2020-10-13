@@ -1,6 +1,10 @@
-export default function activateItem(id) {
+export default function activateItem(user, id) {
   const url = `http://localhost:8080/items/activateItem/${id}`;
-  fetch(url, {
+  return fetch(url, {
     method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      authorization: `Bearer ${user.token}`,
+    },
   });
 }

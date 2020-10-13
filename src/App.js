@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const session = useSelector((state) => state.userReducer.user);
+  const message = useSelector((state) => state.userReducer.message);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function App() {
       </Router>
     );
   }
-  return <Login />;
+  return <Login message={message} />;
 }
 
 export default App;

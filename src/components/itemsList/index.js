@@ -9,10 +9,12 @@ import {
   Modal,
   ButtonGroup,
 } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CreateDesactivationForm from "../createDesactivationForm";
 import EditItemForm from "../editItemForm";
 import activateItem from "../../services/itemServices/activateItem";
+import { getItemsAction } from "../../redux/actions/itemsActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ItemsList = ({ items }) => {
@@ -21,6 +23,9 @@ const ItemsList = ({ items }) => {
 
   const [desactivateItem, setDesactivateItem] = useState({});
   const [editItem, setEditItem] = useState({});
+
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,7 +38,9 @@ const ItemsList = ({ items }) => {
   };
 
   const handleActivate = (item) => {
-    activateItem(item.idItem);
+    activateItem(user, item.idItem).then((response) =>
+      dispatch(getItemsAction(user))
+    );
   };
 
   const handleEditItem = (item) => {

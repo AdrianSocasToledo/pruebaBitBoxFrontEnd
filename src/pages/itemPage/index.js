@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ItemsList from "../../components/itemsList";
-import getItems from "../../services/itemServices/getItems";
-import { Container, Col, Row, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Col,
+  Row,
+  Button,
+  Modal,
+  ButtonGroup,
+} from "react-bootstrap";
 import CreateItemForm from "../../components/createItemForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ItemPage = () => {
   const [show, setShow] = useState(false);
+  const [filter, setFilter] = useState("all");
 
   const items = useSelector((state) => state.itemsReducer.items);
 
@@ -31,7 +38,29 @@ const ItemPage = () => {
         </Row>
         <Row>
           <Col lg="10">
-            <ItemsList items={items}></ItemsList>
+            <Row>
+              <ButtonGroup aria-label="Filter">
+                <Button variant="secondary" onClick={() => setFilter("all")}>
+                  All
+                </Button>
+                <Button variant="secondary" onClick={() => setFilter("Active")}>
+                  Active
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => setFilter("Discontinued")}
+                >
+                  Discontinued
+                </Button>
+              </ButtonGroup>
+            </Row>
+            <ItemsList
+              items={
+                filter === "all"
+                  ? items
+                  : items.filter((item) => item.state === filter)
+              }
+            ></ItemsList>
           </Col>
         </Row>
       </Container>
