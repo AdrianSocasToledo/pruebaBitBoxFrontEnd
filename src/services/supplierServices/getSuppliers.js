@@ -6,5 +6,5 @@ export default function getSuppliers(user) {
     },
   })
     .then((response) => response.json())
-    .then((response) => response.data);
+    .then((response) => response);
 }

@@ -24,37 +24,44 @@ const ItemPage = () => {
   return (
     <div>
       <Container fluid>
-        <Row>
+        <Row className="mt-4">
           <Col>
             <h1>ITEMS</h1>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-4">
           <Col>
             <Button variant="outline-success" onClick={handleShow}>
               Create Item
             </Button>{" "}
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-2">
           <Col lg="10">
             <Row>
-              <ButtonGroup aria-label="Filter">
-                <Button variant="secondary" onClick={() => setFilter("all")}>
-                  All
-                </Button>
-                <Button variant="secondary" onClick={() => setFilter("Active")}>
-                  Active
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={() => setFilter("Discontinued")}
-                >
-                  Discontinued
-                </Button>
-              </ButtonGroup>
+              <Col>
+                <ButtonGroup aria-label="Filter">
+                  <Button variant="secondary" onClick={() => setFilter("all")}>
+                    All
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setFilter("Active")}
+                  >
+                    Active
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setFilter("Discontinued")}
+                  >
+                    Discontinued
+                  </Button>
+                </ButtonGroup>
+              </Col>
             </Row>
+
             <ItemsList
+              className="mt-2"
               items={
                 filter === "all"
                   ? items

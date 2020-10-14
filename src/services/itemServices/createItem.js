@@ -1,5 +1,13 @@
-export default function createItem(user, itemCode, description, price) {
+export default function createItem(
+  user,
+  itemCode,
+  description,
+  price,
+  suppliers,
+  priceReductions
+) {
   const url = "http://localhost:8080/items/createItem";
+
   const item = {
     itemCode: itemCode,
     description: description,
@@ -7,6 +15,8 @@ export default function createItem(user, itemCode, description, price) {
     creator: {
       userName: user.userName,
     },
+    suppliers: suppliers,
+    priceReduction: priceReductions,
   };
 
   return fetch(url, {

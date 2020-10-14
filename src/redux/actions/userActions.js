@@ -17,6 +17,6 @@ export const loginAction = (username, password) => {
           });
         }
       })
-      .catch((e) => console.log(e.message()));
+      .catch((e) => console.log(e));
   };
 };

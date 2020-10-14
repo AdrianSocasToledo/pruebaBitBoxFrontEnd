@@ -47,6 +47,53 @@ const ItemDetail = ({ item }) => {
             </Col>
             <Col></Col>
           </Row>
+          <hr></hr>
+          <Row>
+            <Col>
+              <div>
+                <strong>Suppliers</strong>
+                <div>
+                  {item.suppliers &&
+                    item.suppliers.map((supplier) => (
+                      <ul>
+                        <li>
+                          {supplier.name} - {supplier.country}
+                        </li>
+                      </ul>
+                    ))}
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <hr></hr>
+          <Row>
+            <Col>
+              <div>
+                <strong>Price Reductions</strong>
+                <div>
+                  {item.priceReduction &&
+                    item.priceReduction.map((pr) => (
+                      <ul>
+                        <li>
+                          <div>
+                            <strong>Reduced Price: </strong>
+                            <label>{pr.reducedPrice}</label>
+                          </div>
+                          <div>
+                            <strong>Start Date: </strong>
+                            <label>{pr.startDate}</label>
+                          </div>
+                          <div>
+                            <strong>End Date Price: </strong>
+                            <label>{pr.endDate}</label>
+                          </div>
+                        </li>
+                      </ul>
+                    ))}
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Container>

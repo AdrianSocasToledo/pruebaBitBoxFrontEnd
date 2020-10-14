@@ -88,7 +88,7 @@ const ItemsList = ({ items }) => {
                       <ButtonGroup>
                         <Col lg="3">
                           <div>
-                            <Button variant="primary">
+                            <Button variant="secondary">
                               <Link to={`/itemsDetails/${item.idItem}`}>
                                 Details
                               </Link>

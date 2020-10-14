@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { Multiselect } from "multiselect-react-dropdown";
 import { getItemsAction } from "../../redux/actions/itemsActions";
 import editItem from "../../services/itemServices/editItem";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,25 +9,33 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const EditItemForm = ({ item, onClose }) => {
   const [editDescription, setEditDescription] = useState(item.description);
   const [editPrice, setEditPrice] = useState(item.Price);
+  const [editSuppliers, setEditSuppliers] = useState(item.suppliers);
+  const [editPriceReductions, setEditPriceReductions] = useState(
+    item.priceReduction
+  );
 
   const user = useSelector((state) => state.userReducer.user);
+  const suppliers = useSelector((state) => state.suppliersReducer.suppliers);
+  const priceReductions = useSelector(
+    (state) => state.priceReductionReducer.priceReductions
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     setEditDescription(item.description);
     setEditPrice(item.price);
+    setEditSuppliers(item.suppliers);
+    setEditPriceReductions(item.priceReduction);
   }, [item]);
 
   const handleEditItem = () => {
-    let supplier;
-    let priceReduction;
     editItem(
       user,
       item.idItem,
       editDescription,
       editPrice,
-      supplier,
-      priceReduction
+      editSuppliers,
+      editPriceReductions
     ).then((response) => dispatch(getItemsAction(user)));
     onClose();
   };
@@ -61,6 +70,30 @@ const EditItemForm = ({ item, onClose }) => {
                 onChange={(e) => setEditPrice(e.target.value)}
               ></Form.Control>
             </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label>Suppliers</Form.Label>
+            <Multiselect
+              options={suppliers}
+              displayValue="name"
+              selectedValues={item.suppliers}
+              onSelect={(supplier) => setEditSuppliers(supplier)}
+              onRemove={(supplier) => setEditSuppliers(supplier)}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label>Price Reductions</Form.Label>
+            <Multiselect
+              options={priceReductions}
+              displayValue="reducedPrice"
+              selectedValues={item.priceReduction}
+              onSelect={(element) => setEditPriceReductions(element)}
+              onRemove={(element) => setEditPriceReductions(element)}
+            />
           </Col>
         </Row>
       </Modal.Body>

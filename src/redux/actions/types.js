@@ -1,3 +1,5 @@
 export const GET_ITEMS = "GET_ITEMS";
+export const GET_SUPPLIERS = "GET_SUPPLIERS";
+export const GET_PRICE_REDUCTIONS = "GET_PRICE_REDUCTIONS";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAIL = "LOGIN_USER_FAIL";

@@ -3,16 +3,17 @@ export default function editItem(
   id,
   description,
   price,
-  supplier,
+  suppliers,
   priceReduction
 ) {
   const url = "http://localhost:8080/items/editItem";
+  console.log("pr edit", priceReduction);
   const request = {
     idItem: id,
     description: description,
     price: price,
-    suppliers: supplier,
-    priceReductions: priceReduction,
+    suppliers: suppliers,
+    priceReduction: priceReduction,
   };
   return fetch(url, {
     method: "PUT",

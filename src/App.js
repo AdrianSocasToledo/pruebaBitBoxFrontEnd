@@ -8,6 +8,8 @@ import Login from "../src/components/login";
 import { getItemsAction } from "./redux/actions/itemsActions";
 import { Navbar, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getSuppliersAction } from "./redux/actions/suppliersActions";
+import { getPriceReductionsAction } from "./redux/actions/priceReductionsActions";
 
 function App() {
   const session = useSelector((state) => state.userReducer.user);
@@ -15,7 +17,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (session) dispatch(getItemsAction(session));
+    if (session) {
+      dispatch(getItemsAction(session));
+      dispatch(getSuppliersAction(session));
+      dispatch(getPriceReductionsAction(session));
+    }
   }, [session, dispatch]);
 
   if (session) {
@@ -27,7 +33,9 @@ function App() {
             <Nav.Link>
               <Link to="/items">Items</Link>
             </Nav.Link>
-            <Nav.Link href="#">Desactivations</Nav.Link>
+            {
+              //<Nav.Link href="#">Desactivations</Nav.Link>
+            }
           </Nav>
         </Navbar>
         <Switch>
